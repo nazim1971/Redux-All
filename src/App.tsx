@@ -1,6 +1,17 @@
+import { useDispatch } from "react-redux"
+import { decrement, increment } from "./redux/features/counter/counterSlice";
 
 function App() {
 
+  const dispatch = useDispatch();
+
+  const handleIncrement = () => {
+    dispatch(increment())
+  }
+
+  const handledecrement = () => {
+    dispatch(decrement())
+  }
 
   return (
    <div>
