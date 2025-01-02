@@ -20,8 +20,6 @@ function App() {
   return (
    <div>
     <h1>Counter with Redux</h1>
-    <h1>Counter with Redux</h1>
-    <h1>Counter with Redux</h1>
     <button onClick={()=>handleIncrement (2) } >Increment by 2</button>
     <button onClick={()=>handleIncrement (5) } >Increment by 5</button>
     <div>
