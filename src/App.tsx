@@ -9,22 +9,26 @@ function App() {
     state.counter
   )
 
-  const handleIncrement = () => {
-    dispatch(increment(5))
+  const handleIncrement = (payload:number) => {
+    dispatch(increment(payload))
   }
 
-  const handledecrement = () => {
-    dispatch(decrement(1))
+  const handledecrement = (payload: number) => {
+    dispatch(decrement(payload))
   }
 
   return (
    <div>
     <h1>Counter with Redux</h1>
-    <button onClick={handleIncrement} >Increment</button>
+    <h1>Counter with Redux</h1>
+    <h1>Counter with Redux</h1>
+    <h1>Counter with Redux</h1>
+    <button onClick={()=>handleIncrement (2) } >Increment by 2</button>
+    <button onClick={()=>handleIncrement (5) } >Increment by 5</button>
     <div>
       {count}
     </div>
-    <button onClick={handledecrement} >Decrement</button>
+    <button onClick={()=> handledecrement(5)} >Decrement</button>
    </div>
   )
 }
