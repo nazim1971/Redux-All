@@ -17,15 +17,15 @@ function App() {
     dispatch(decrement(payload))
   }
 
-  return (
-   <div>
+  return ( 
+   <div className="px-10 mt-10">
     <h1>Counter with Redux</h1>
-    <button onClick={()=>handleIncrement (2) } >Increment by 2</button>
-    <button onClick={()=>handleIncrement (5) } >Increment by 5</button>
+    <button className="btn bg-slate-200 p-2 m-2 rounded-2xl" onClick={()=>handleIncrement (2) } >Increment by 2</button>
+    <button className="btn bg-slate-200 p-2 m-2 rounded-2xl" onClick={()=>handleIncrement (5) } >Increment by 5</button>
     <div>
       {count}
     </div>
-    <button onClick={()=> handledecrement(5)} >Decrement</button>
+    <button className="btn bg-slate-200 p-2 m-2 rounded-2xl" onClick={()=> handledecrement(5)} >Decrement</button>
    </div>
   )
 }
