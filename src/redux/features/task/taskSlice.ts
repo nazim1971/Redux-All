@@ -23,6 +23,14 @@ const initialState : IinitState = {
         description: 'Create Gome page, and route',
         dueDate: '2025-11',
         isCompleted: false,
+        priority: "Medium"
+    },
+    {
+        id: 'S-12',
+        title: 'Cpp Crack Tips',
+        description: 'Create Home page, and route',
+        dueDate: '2025-11',
+        isCompleted: false,
         priority: "Low"
     }
 ],
