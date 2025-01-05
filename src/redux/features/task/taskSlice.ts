@@ -23,7 +23,7 @@ const initialState : IinitState = {
         description: 'Create Gome page, and route',
         dueDate: '2025-11',
         isCompleted: false,
-        priority: "High"
+        priority: "Low"
     }
 ],
 filter: 'all'
