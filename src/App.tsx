@@ -2,6 +2,7 @@ import { decrement, increment } from "./redux/features/counter/counterSlice";
 import { RoootState } from "./redux/store";
 import { useAppDispatch, useAppSelector } from "./redux/hook";
 import { Button } from "./components/ui/button";
+import Navbar from "./components/layout/Navbar";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
 
   return ( 
    <div className="px-10 mt-10">
+    <Navbar/>
     <h1>Counter with Redux</h1>
     <Button className="btn bg-slate-200 p-2 m-2 rounded-2xl" onClick={()=>handleIncrement (2) } >Increment by 2</Button>
     <Button className="btn bg-slate-200 p-2 m-2 rounded-2xl" onClick={()=>handleIncrement (5) } >Increment by 5</Button>
