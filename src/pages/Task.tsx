@@ -1,3 +1,4 @@
+import { AddTaskModel } from "@/module/todoTask/AddTaskModel";
 import TodoTask from "@/module/todoTask/todoTask";
 import { selectTask } from "@/redux/features/task/taskSlice";
 import { useAppSelector } from "@/redux/hook";
@@ -15,6 +16,7 @@ const Task = () => {
   return (
     <div>
         <div className="py-5 text-3xl font-semibold text-violet-200">All Task</div>
+        <AddTaskModel/>
        <div className="space-y-5 mt-5">
        {
         tasks.map(task=>(
