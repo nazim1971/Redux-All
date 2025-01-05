@@ -3,6 +3,7 @@ import { RoootState } from "./redux/store";
 import { useAppDispatch, useAppSelector } from "./redux/hook";
 import { Button } from "./components/ui/button";
 import Navbar from "./components/layout/Navbar";
+import { Outlet } from "react-router-dom";
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
       {count}
     </div>
     <Button className="btn bg-slate-200 p-2 m-2 rounded-2xl" onClick={()=> handledecrement(5)} >Decrement</Button>
+    <Outlet/>
    </div>
   )
 }
