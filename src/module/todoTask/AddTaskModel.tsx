@@ -8,11 +8,15 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { Form, FormControl,  FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
 import { useForm } from "react-hook-form"
 
 export function AddTaskModel() {
 
-    const form = useForm()
+    const form = useForm();
+    const onSubmit = (data) =>{
+        console.log(data);
+    }
 
   return (
     <Dialog>
@@ -25,24 +29,28 @@ export function AddTaskModel() {
           
         </DialogHeader>
         <Form {...form}>
-  <FormField
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <FormField
     control={form.control}
     name="title"
-    render={() => (
+    render={(field) => (
       <FormItem>
         <FormLabel />
         <FormControl>
-          { /* Your form field */}
+         <Input {...field}/>
         </FormControl>
         <FormMessage />
       </FormItem>
     )}
   />
-</Form>
-
         <DialogFooter>
           <Button type="submit">Save changes</Button>
         </DialogFooter>
+        </form>
+        
+        </Form>
+
+        
       </DialogContent>
     </Dialog>
   )
