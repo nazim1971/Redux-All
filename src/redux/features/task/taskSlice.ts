@@ -1,13 +1,29 @@
+import { ITask } from "@/types/types";
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-    task: {
+interface IinitState{
+    task: ITask[]
+}
+
+const initialState : IinitState = {
+    task: [
+        {
         id: 'S-10',
         title: 'Initialize frontend',
         description: 'Create Gome page, and route',
-        dueData: '2025-11',
-        isCompleted: false
+        dueDate: '2025-11',
+        isCompleted: false,
+        priority: "High"
+    },
+    {
+        id: 'S-11',
+        title: 'Gmae changer',
+        description: 'Create Gome page, and route',
+        dueDate: '2025-11',
+        isCompleted: false,
+        priority: "High"
     }
+]
 }
 
 const taskSlice = createSlice({
@@ -15,3 +31,5 @@ const taskSlice = createSlice({
     initialState,
     reducers: {}
 })
+
+export default taskSlice.reducer
