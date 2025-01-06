@@ -68,6 +68,14 @@ const taskSlice = createSlice({
       console.log(action);
       state.tasks = state.tasks.filter((task) => task.id !== action.payload);
     },
+    updateTask: (state, action: PayloadAction<ITask>) => {
+        console.log(action);
+        state.tasks = state.tasks.map((task) =>
+          task.id === action.payload.id
+            ? { ...task, ...action.payload } 
+            : task
+        );
+      }
   },
 });
 
@@ -75,6 +83,6 @@ export const selectTask = (state: RoootState) => {
   return state.todo.tasks;
 };
 
-export const { addTask, toogleCompleteState, deleteTask } = taskSlice.actions;
+export const { addTask, toogleCompleteState, deleteTask, updateTask } = taskSlice.actions;
 
 export default taskSlice.reducer;
