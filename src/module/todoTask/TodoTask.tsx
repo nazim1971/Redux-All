@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { cn } from "@/lib/utils"
-import { toogleCompleteState } from "@/redux/features/task/taskSlice"
+import { deleteTask, toogleCompleteState } from "@/redux/features/task/taskSlice"
 
 import { useAppDispatch } from "@/redux/hook"
 import { ITask } from "@/types/types"
@@ -27,10 +27,10 @@ const TodoTask = ({task}: IProps) => {
           <h1> {task.title} </h1>
         </div>
         <div className="flex gap-3 items-center">
-        <Button variant={"link"} className="p-0 text-red-500" >
-          <Trash2/>
+        <Button onClick={()=> dispatch(deleteTask(task.id))} variant={"link"} className="p-0 text-red-500" >
+          <Trash2 />
         </Button>
-        <Checkbox onClick={()=> dispatch(toogleCompleteState(task.id))} />
+        <Checkbox checked={task.isCompleted} onClick={()=> dispatch(toogleCompleteState(task.id))} />
         </div>
       </div>
       <p className="mt-5"> {task.description} </p>
