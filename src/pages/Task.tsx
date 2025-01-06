@@ -1,5 +1,5 @@
 import { AddTaskModel } from "@/module/todoTask/AddTaskModel";
-import TodoTask from "@/module/todoTask/todoTask";
+import TodoTask from "@/module/todoTask/TodoTask";
 import { selectTask } from "@/redux/features/task/taskSlice";
 import { useAppSelector } from "@/redux/hook";
 

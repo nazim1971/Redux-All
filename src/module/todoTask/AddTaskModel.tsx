@@ -18,12 +18,18 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { cn } from "@/lib/utils"
 import { format } from "date-fns"
 import { CalendarIcon } from "lucide-react"
+import { useAppDispatch } from "@/redux/hook"
+import { addTask } from "@/redux/features/task/taskSlice"
 
 export function AddTaskModel() {
 
     const form = useForm();
+
+    const dispatch = useAppDispatch()
+
     const onSubmit = (data) =>{
         console.log(data);
+        dispatch(addTask(data))
     }
 
   return (
@@ -80,7 +86,7 @@ export function AddTaskModel() {
                     <Button
                       variant={"outline"}
                       className={cn(
-                        "w-[240px] pl-3 text-left font-normal",
+                        "w-full pl-3 text-left font-normal",
                         !field.value && "text-muted-foreground"
                       )}
                     >
@@ -98,7 +104,9 @@ export function AddTaskModel() {
                     mode="single"
                     selected={field.value}
                     onSelect={field.onChange}
-                    
+                    // disabled={(date) =>
+                    //   date > new Date() || date < new Date("1900-01-01")
+                    // }
                     initialFocus
                   />
                 </PopoverContent>

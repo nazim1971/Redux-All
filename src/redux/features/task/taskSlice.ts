@@ -1,6 +1,6 @@
 import { RoootState } from "@/redux/store";
 import { ITask } from "@/types/types";
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface IinitState{
     tasks: ITask[];
@@ -40,11 +40,17 @@ filter: 'all'
 const taskSlice = createSlice({
     name: "Tasks",
     initialState,
-    reducers: {}
+    reducers: {
+        addTask:(state,action: PayloadAction<ITask> ) =>{
+            state.tasks.push(action.payload)
+        }
+    }
 })
 
 export const selectTask = (state: RoootState)=>{
     return state.todo.tasks
 }
+
+export const {addTask} = taskSlice.actions
 
 export default taskSlice.reducer
