@@ -19,31 +19,48 @@ import { cn } from "@/lib/utils"
 import { format } from "date-fns"
 import { CalendarIcon } from "lucide-react"
 import { useAppDispatch } from "@/redux/hook"
-import { addTask } from "@/redux/features/task/taskSlice"
+import { addTask, updateTask } from "@/redux/features/task/taskSlice"
 import { ITask } from "@/types/types"
 
-export function AddTaskModel() {
+interface AddTaskModelProps {
+  task?: ITask; // Optional task prop for editing
+}
 
-    const form = useForm();
+
+export function AddTaskModel({ task }: AddTaskModelProps) {
+
+  const form = useForm({
+    defaultValues: {
+      title: task?.title || '',
+      description: task?.description || '',
+      dueDate: task?.dueDate || null,
+      priority: task?.priority || 'Medium',
+    }
+  });
 
     const dispatch = useAppDispatch()
 
-    const onSubmit: SubmitHandler<FieldValues> = (data) =>{
-        console.log(data);
-        dispatch(addTask(data as ITask))
-    }
+    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+      if (task) {
+        // If task exists, dispatch updateTask action
+        dispatch(updateTask({ ...task, ...data } as ITask));
+      } else {
+        // If no task, dispatch addTask action
+        dispatch(addTask(data as ITask));
+      }
+    };
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button >Add Task</Button>
+      <Button>{task ? "Edit Task" : "Add Task"}</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogDescription className="sr-only">
-          Fill up this form to add task
+        {task ? "Edit this task" : "Fill up this form to add task"}
         </DialogDescription>
         <DialogHeader>
-          <DialogTitle>Add Task</DialogTitle>
+        <DialogTitle>{task ? "Edit Task" : "Add Task"}</DialogTitle>
           
         </DialogHeader>
         <Form {...form}>
@@ -141,7 +158,7 @@ export function AddTaskModel() {
     )}
   />
         <DialogFooter>
-          <Button type="submit">Save changes</Button>
+        <Button type="submit">{task ? "Update Task" : "Save Task"}</Button>
         </DialogFooter>
         </form>
         

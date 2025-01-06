@@ -5,7 +5,7 @@ import { deleteTask, toogleCompleteState } from "@/redux/features/task/taskSlice
 
 import { useAppDispatch } from "@/redux/hook"
 import { ITask } from "@/types/types"
-import { Trash2 } from "lucide-react"
+import { Paperclip, PenBox, Trash2 } from "lucide-react"
 
 interface IProps {
     task: ITask
@@ -27,8 +27,12 @@ const TodoTask = ({task}: IProps) => {
           <h1 className={cn({'line-through' : task.isCompleted})} > {task.title} </h1>
         </div>
         <div className="flex gap-3 items-center">
+
         <Button onClick={()=> dispatch(deleteTask(task.id))} variant={"link"} className="p-0 text-red-500" >
           <Trash2 />
+        </Button>
+        <Button  variant={"link"} className="p-0 text-red-500" >
+          <PenBox />
         </Button>
         <Checkbox checked={task.isCompleted} onClick={()=> dispatch(toogleCompleteState(task.id))} />
         </div>
