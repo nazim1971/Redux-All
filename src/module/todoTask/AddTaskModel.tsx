@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button"
 import {
   Dialog,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -9,6 +10,7 @@ import {
 } from "@/components/ui/dialog"
 import { Form, FormControl,  FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
 import { useForm } from "react-hook-form"
 
 export function AddTaskModel() {
@@ -24,20 +26,36 @@ export function AddTaskModel() {
         <Button >Add Task</Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
+        <DialogDescription className="sr-only">
+          Fill up this form to add task
+        </DialogDescription>
         <DialogHeader>
           <DialogTitle>Add Task</DialogTitle>
           
         </DialogHeader>
         <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form className="space-y-3" onSubmit={form.handleSubmit(onSubmit)}>
         <FormField
     control={form.control}
     name="title"
-    render={(field) => (
+    render={({field}) => (
       <FormItem>
-        <FormLabel />
+        <FormLabel>Title</FormLabel>
         <FormControl>
-         <Input {...field}/>
+         <Input {...field} value={field.value || ''} />
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    )}
+  />
+        <FormField
+    control={form.control}
+    name="description"
+    render={({field}) => (
+      <FormItem>
+        <FormLabel>Description</FormLabel>
+        <FormControl>
+         <Textarea {...field} value={field.value || ''} />
         </FormControl>
         <FormMessage />
       </FormItem>

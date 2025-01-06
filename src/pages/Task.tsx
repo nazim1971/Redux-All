@@ -20,7 +20,7 @@ const Task = () => {
        <div className="space-y-5 mt-5">
        {
         tasks.map(task=>(
-            <TodoTask task={task} />
+            <TodoTask key={task.id} task={task} />
         ))
        }
        </div>
