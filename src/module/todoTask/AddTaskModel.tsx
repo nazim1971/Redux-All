@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -149,7 +150,9 @@ export function AddTaskModel({ task }: AddTaskModelProps) {
               )}
             />
             <DialogFooter>
+              <DialogClose asChild >
               <Button type="submit">{task ? "Update Task" : "Save Task"}</Button>
+              </DialogClose>
             </DialogFooter>
           </form>
         </Form>
