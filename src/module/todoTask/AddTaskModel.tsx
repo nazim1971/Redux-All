@@ -12,6 +12,7 @@ import { Form, FormControl,  FormField, FormItem, FormLabel, FormMessage } from 
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { useForm } from "react-hook-form"
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select"
 
 export function AddTaskModel() {
 
@@ -56,6 +57,42 @@ export function AddTaskModel() {
         <FormLabel>Description</FormLabel>
         <FormControl>
          <Textarea {...field} value={field.value || ''} />
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    )}
+  />
+        <FormField
+    control={form.control}
+    name="dueDate"
+    render={({field}) => (
+      <FormItem>
+        <FormLabel>Due data</FormLabel>
+        <FormControl>
+         <Textarea {...field} value={field.value || ''} />
+        </FormControl>
+        <FormMessage />
+      </FormItem>
+    )}
+  />    
+        <FormField
+    control={form.control}
+    name="priority"
+    render={({field}) => (
+      <FormItem>
+        <FormLabel>Priority</FormLabel>
+        <FormControl>
+        <Select onValueChange={field.onChange} defaultValue={field.value}>
+  <SelectTrigger className="w-[180px]">
+    <SelectValue placeholder="Theme" />
+  </SelectTrigger>
+  <SelectContent>
+    
+    <SelectItem value="dark">Dark</SelectItem>
+    <SelectItem value="system">System</SelectItem>
+  </SelectContent>
+</Select>
+
         </FormControl>
         <FormMessage />
       </FormItem>
