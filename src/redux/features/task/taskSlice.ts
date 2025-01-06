@@ -1,6 +1,7 @@
 import { RoootState } from "@/redux/store";
 import { ITask } from "@/types/types";
 import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
+import { act } from "react";
 
 interface IinitState{
     tasks: ITask[];
@@ -53,14 +54,21 @@ const taskSlice = createSlice({
            
             const taskData = createTask(action.payload)
             state.tasks.push(taskData)
+        },
+        toogleCompleteState: ( state, action: PayloadAction<string>)=>{
+            console.log(action);
+            state.tasks.forEach((task) => 
+                task.id === action.payload ? (task.isCompleted = !task.isCompleted): task
+            );
         }
     }
+   
 })
 
 export const selectTask = (state: RoootState)=>{
     return state.todo.tasks
 }
 
-export const {addTask} = taskSlice.actions
+export const { addTask, toogleCompleteState } = taskSlice.actions;
 
 export default taskSlice.reducer

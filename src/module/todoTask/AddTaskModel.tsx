@@ -20,6 +20,7 @@ import { format } from "date-fns"
 import { CalendarIcon } from "lucide-react"
 import { useAppDispatch } from "@/redux/hook"
 import { addTask } from "@/redux/features/task/taskSlice"
+import { ITask } from "@/types/types"
 
 export function AddTaskModel() {
 
@@ -29,7 +30,7 @@ export function AddTaskModel() {
 
     const onSubmit: SubmitHandler<FieldValues> = (data) =>{
         console.log(data);
-        dispatch(addTask(data))
+        dispatch(addTask(data as ITask))
     }
 
   return (

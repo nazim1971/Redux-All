@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { cn } from "@/lib/utils"
+import { toogleCompleteState } from "@/redux/features/task/taskSlice"
+
+import { useAppDispatch } from "@/redux/hook"
 import { ITask } from "@/types/types"
 import { Trash2 } from "lucide-react"
 
@@ -9,6 +12,9 @@ interface IProps {
 }
 
 const TodoTask = ({task}: IProps) => {
+
+  const dispatch = useAppDispatch()
+
   return (
     <div className="border px-5 py-5 rounded-md">
       <div className="flex justify-between items-center">
@@ -24,7 +30,7 @@ const TodoTask = ({task}: IProps) => {
         <Button variant={"link"} className="p-0 text-red-500" >
           <Trash2/>
         </Button>
-        <Checkbox/>
+        <Checkbox onClick={()=> dispatch(toogleCompleteState(task.id))} />
         </div>
       </div>
       <p className="mt-5"> {task.description} </p>
