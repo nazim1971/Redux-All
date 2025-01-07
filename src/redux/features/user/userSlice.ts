@@ -1,3 +1,5 @@
+import { selectTask } from '@/redux/features/task/taskSlice';
+import { RoootState } from '@/redux/store';
 import { IUser } from "@/types/types";
 import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
 
@@ -44,7 +46,18 @@ const userSlice = createSlice({
       state.users.push(userData);
     },
     deleteUser: (state, action: PayloadAction<string>) =>{
-
+        console.log(action);
+        state.users= state.users.filter((user)=> user.id !== action.payload)
     }
   },
 });
+
+export const selectUser = (state: RoootState) =>{
+    const filter = state.todo.filter
+
+    return state.todo.tasks
+}
+
+export const {addUser, deleteUser} = userSlice.actions
+
+export default userSlice.reducer
