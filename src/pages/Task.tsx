@@ -11,7 +11,7 @@ const Task = () => {
     const tasks = useAppSelector(selectTask)
 
     console.log(tasks);
-    const dispatch = useAppDispatch(updateFilter("All"))
+    const dispatch = useAppDispatch(updateFilter('All'))
 
 
 
