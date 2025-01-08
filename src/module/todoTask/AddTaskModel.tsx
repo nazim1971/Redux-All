@@ -19,9 +19,10 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { cn } from "@/lib/utils"
 import { format } from "date-fns"
 import { CalendarIcon, PenBox } from "lucide-react"
-import { useAppDispatch } from "@/redux/hook"
+import { useAppDispatch, useAppSelector } from "@/redux/hook"
 import { addTask, updateTask } from "@/redux/features/task/taskSlice"
 import { ITask } from "@/types/types"
+import { selectUser } from "@/redux/features/user/userSlice"
 
 interface AddTaskModelProps {
   task?: ITask; // Optional task prop for editing
@@ -29,17 +30,20 @@ interface AddTaskModelProps {
 
 
 export function AddTaskModel({ task }: AddTaskModelProps) {
-
+  
+  const users = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
   const form = useForm({
     defaultValues: {
       title: task?.title || '',
       description: task?.description || '',
       dueDate: task?.dueDate || null,
       priority: task?.priority || 'Medium',
+      assignTo: users?.id
     }
   });
 
-    const dispatch = useAppDispatch()
+   
 
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
       if (task) {
@@ -127,6 +131,7 @@ export function AddTaskModel({ task }: AddTaskModelProps) {
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="priority"
@@ -149,6 +154,31 @@ export function AddTaskModel({ task }: AddTaskModelProps) {
                 </FormItem>
               )}
             />
+
+            <FormField
+              control={form.control}
+              name="assignedTo"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Assign To</FormLabel>
+                  <FormControl>
+                    <Select onValueChange={field.onChange} defaultValue={field.value ?? undefined}>
+                      <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Priority" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {
+                          users.map((user)=> <SelectItem value={user.id}>{user.name} </SelectItem> )
+                        }
+                        
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
             <DialogFooter>
               <DialogClose asChild >
               <Button type="submit">{task ? "Update Task" : "Save Task"}</Button>

@@ -1,4 +1,4 @@
-import { selectTask } from '@/redux/features/task/taskSlice';
+
 import { RoootState } from '@/redux/store';
 import { IUser } from "@/types/types";
 import { createSlice, nanoid, PayloadAction } from "@reduxjs/toolkit";
@@ -38,10 +38,10 @@ const createUser = (userData: DraftUser): IUser => {
 };
 
 const userSlice = createSlice({
-  name: "Users",
+  name: "users",
   initialState,
   reducers: {
-    addUser: (state, action: PayloadAction<DraftUser>) => {
+    addUser: (state, action: PayloadAction<IUser>) => {
       const userData = createUser(action.payload);
       state.users.push(userData);
     },
@@ -53,9 +53,8 @@ const userSlice = createSlice({
 });
 
 export const selectUser = (state: RoootState) =>{
-    const filter = state.todo.filter
 
-    return state.todo.tasks
+    return state.user.users
 }
 
 export const {addUser, deleteUser} = userSlice.actions
