@@ -40,7 +40,7 @@ export function AddTaskModel({ task }: AddTaskModelProps) {
       dueDate: task?.dueDate || null,
       priority: task?.priority || 'Medium',
       assignTo: task?.assignTo || ''
-    }
+    },
   });
 
    
@@ -53,6 +53,7 @@ export function AddTaskModel({ task }: AddTaskModelProps) {
         // If no task, dispatch addTask action
         dispatch(addTask(data as ITask));
       }
+      form.reset()
     };
 
   return (
