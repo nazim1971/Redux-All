@@ -30,7 +30,7 @@ interface AddTaskModelProps {
 
 
 export function AddTaskModel({ task }: AddTaskModelProps) {
-  
+
   const users = useAppSelector(selectUser);
   const dispatch = useAppDispatch();
   const form = useForm({
@@ -39,7 +39,7 @@ export function AddTaskModel({ task }: AddTaskModelProps) {
       description: task?.description || '',
       dueDate: task?.dueDate || null,
       priority: task?.priority || 'Medium',
-      assignTo: users?.id
+      assignTo: task?.assignTo || ''
     }
   });
 
@@ -120,7 +120,7 @@ export function AddTaskModel({ task }: AddTaskModelProps) {
                       <PopoverContent className="w-auto p-0" align="start">
                         <Calendar
                           mode="single"
-                          selected={field.value ?? undefined} // Use undefined if null
+                          selected={field.value} // Use undefined if null
                           onSelect={field.onChange}
                           initialFocus
                         />
@@ -157,7 +157,7 @@ export function AddTaskModel({ task }: AddTaskModelProps) {
 
             <FormField
               control={form.control}
-              name="assignedTo"
+              name="assignTo"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel>Assign To</FormLabel>

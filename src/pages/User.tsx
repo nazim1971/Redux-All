@@ -1,6 +1,5 @@
-
-import TodoTask from "@/module/todoTask/TodoTask";
 import { AddUserModel } from "@/module/user/AddUserModel";
+import TodoUser from "@/module/user/TodoUser";
 import { selectUser } from "@/redux/features/user/userSlice";
 import { useAppSelector } from "@/redux/hook";
 
@@ -22,7 +21,7 @@ const User = () => {
        <div className="space-y-5 mt-5">
        {
         users.map(user=>(
-            <TodoTask key={user.id} user={user} />
+            <TodoUser key={user.id} user={user} />
         ))
        }
        </div>
