@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import counterReducer from "./features/counter/counterSlice"
-import logger from "./features/middlewares/loger";
+// import logger from "./features/middlewares/loger";
 import taskReducer from "./features/task/taskSlice"
 import userReducer from "./features/user/userSlice"
 import { baseApi } from "./features/api/baseApi";
@@ -13,7 +13,8 @@ const store = configureStore({
         [baseApi.reducerPath]: baseApi.reducer,
     },
 
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(baseApi.middleware)
+    // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger)
 }) 
 
 export default store;

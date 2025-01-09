@@ -1,17 +1,32 @@
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { AddTaskModel } from "@/module/todoTask/AddTaskModel";
 import TodoTask from "@/module/todoTask/TodoTask";
+import { useGetTaskQuery } from "@/redux/features/api/baseApi";
 import { selectTask, updateFilter } from "@/redux/features/task/taskSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hook";
+import { ITask } from "@/types/types";
 
 
 
 const Task = () => {
 
-    const tasks = useAppSelector(selectTask)
 
-    console.log(tasks);
-    const dispatch = useAppDispatch(updateFilter('All'))
+  const {data,isLoading,isError} = useGetTaskQuery(undefined);
+  if (isLoading) {
+    return <p className="text-3xl">Loading...</p>;
+  }
+
+  if (isError) {
+    return <p className="text-3xl">Error loading tasks</p>;
+  }
+
+  if (!data || !data.tasks) {
+    return <p className="text-3xl">No tasks available</p>;
+  }
+    // const tasks = useAppSelector(selectTask)
+
+    // console.log(tasks);
+    // const dispatch = useAppDispatch(updateFilter('All'))
 
 
 
@@ -38,10 +53,10 @@ const Task = () => {
         </div>
        <div className="space-y-5 mt-5">
        {
-        tasks.map(task=>(
+          data.tasks.map((task: ITask) => (
             <TodoTask key={task.id} task={task} />
-        ))
-       }
+          ))
+        }
        </div>
     </div>
   )
