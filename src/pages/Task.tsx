@@ -10,7 +10,7 @@ import { ITask } from "@/types/types";
 
 const Task = () => {
 
-
+  const dispatch = useAppDispatch(updateFilter('All'))
   const {data,isLoading,isError} = useGetTaskQuery(undefined);
   if (isLoading) {
     return <p className="text-3xl">Loading...</p>;
@@ -23,10 +23,7 @@ const Task = () => {
   if (!data || !data.tasks) {
     return <p className="text-3xl">No tasks available</p>;
   }
-    // const tasks = useAppSelector(selectTask)
 
-    // console.log(tasks);
-    // const dispatch = useAppDispatch(updateFilter('All'))
 
 
 
