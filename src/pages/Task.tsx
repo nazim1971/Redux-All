@@ -23,7 +23,10 @@ const Task = () => {
   if (!data || !data.tasks) {
     return <p className="text-3xl">No tasks available</p>;
   }
+    // const tasks = useAppSelector(selectTask)
 
+    // console.log(tasks);
+  
 
 
 
