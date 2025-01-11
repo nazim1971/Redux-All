@@ -49,9 +49,13 @@ export function AddTaskModel({ task }: AddTaskModelProps) {
       if (task) {
         // If task exists, dispatch updateTask action
         dispatch(updateTask({ ...task, ...data } as ITask));
+       
       } else {
         // If no task, dispatch addTask action
         dispatch(addTask(data as ITask));
+        const taskData = {
+          ...data, isCompleted: false,
+        }
       }
       form.reset()
     };
