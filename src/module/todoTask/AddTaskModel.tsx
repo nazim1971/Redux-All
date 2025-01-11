@@ -23,6 +23,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hook"
 import { addTask, updateTask } from "@/redux/features/task/taskSlice"
 import { ITask } from "@/types/types"
 import { selectUser } from "@/redux/features/user/userSlice"
+import { useCreateTaskMutation } from "@/redux/features/api/baseApi"
 
 interface AddTaskModelProps {
   task?: ITask; // Optional task prop for editing
@@ -42,23 +43,26 @@ export function AddTaskModel({ task }: AddTaskModelProps) {
       assignTo: task?.assignTo || ''
     },
   });
-
+    const [createTask,{data, isLoading, isError} ] = useCreateTaskMutation();
    
-
-    const onSubmit: SubmitHandler<FieldValues> = (data) => {
-      if (task) {
-        // If task exists, dispatch updateTask action
-        dispatch(updateTask({ ...task, ...data } as ITask));
-       
-      } else {
-        // If no task, dispatch addTask action
-        dispatch(addTask(data as ITask));
-        const taskData = {
-          ...data, isCompleted: false,
+    console.log('data', data);
+    const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+      try {
+        if (task) {
+          dispatch(updateTask({ ...task, ...data } as ITask));
+        } else {
+          const taskData = { ...data, isCompleted: false };
+          const res = await createTask(taskData).unwrap();
+          console.log('Inside submit button', res);
+          dispatch(addTask(res));
         }
+      } catch (error) {
+        console.error('Error creating/updating task:', error);
+      } finally {
+        form.reset();
       }
-      form.reset()
     };
+    
 
   return (
    <Dialog>
